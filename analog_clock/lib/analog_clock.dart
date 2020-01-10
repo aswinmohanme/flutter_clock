@@ -40,6 +40,8 @@ class _AnalogClockState extends State<AnalogClock> {
   var _location = '';
   Timer _timer;
 
+  static double radius = 320;
+
   @override
   void initState() {
     super.initState();
@@ -103,13 +105,13 @@ class _AnalogClockState extends State<AnalogClock> {
             highlightColor: Color(0xFF8AB4F8),
             // Second hand.
             accentColor: Color(0xFF669DF6),
-            backgroundColor: Color(0xFFD2E3FC),
+            backgroundColor: Colors.white,
           )
         : Theme.of(context).copyWith(
             primaryColor: Color(0xFFD2E3FC),
             highlightColor: Color(0xFF4285F4),
             accentColor: Color(0xFF8AB4F8),
-            backgroundColor: Color(0xFF3C4043),
+            backgroundColor: Colors.black,
           );
 
     final time = DateFormat.Hms().format(DateTime.now());
@@ -136,41 +138,104 @@ class _AnalogClockState extends State<AnalogClock> {
         child: Stack(
           children: [
             // Example of a hand drawn with [CustomPainter].
-            DrawnHand(
-              color: customTheme.accentColor,
-              thickness: 4,
-              size: 1,
-              angleRadians: _now.second * radiansPerTick,
-            ),
-            DrawnHand(
-              color: customTheme.highlightColor,
-              thickness: 16,
-              size: 0.9,
-              angleRadians: _now.minute * radiansPerTick,
-            ),
-            // Example of a hand drawn with [Container].
-            ContainerHand(
-              color: Colors.transparent,
-              size: 0.5,
-              angleRadians: _now.hour * radiansPerHour +
-                  (_now.minute / 60) * radiansPerHour,
-              child: Transform.translate(
-                offset: Offset(0.0, -60.0),
-                child: Container(
-                  width: 32,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    color: customTheme.primaryColor,
-                  ),
+            // DrawnHand(
+            //   color: customTheme.accentColor,
+            //   thickness: 4,
+            //   size: 1,
+            //   angleRadians: _now.second * radiansPerTick,
+            // ),
+            // DrawnHand(
+            //   color: customTheme.highlightColor,
+            //   thickness: 16,
+            //   size: 0.9,
+            //   angleRadians: _now.minute * radiansPerTick,
+            // ),
+            // // Example of a hand drawn with [Container].
+            // ContainerHand(
+            //   color: Colors.transparent,
+            //   size: 0.5,
+            //   angleRadians: _now.hour * radiansPerHour +
+            //       (_now.minute / 60) * radiansPerHour,
+            //   child: Transform.translate(
+            //     offset: Offset(0.0, -60.0),
+            //     child: Container(
+            //       width: 32,
+            //       height: 150,
+            //       decoration: BoxDecoration(
+            //         color: customTheme.primaryColor,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            // Positioned(
+            //   left: 0,
+            //   bottom: 0,
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(8),
+            //     child: weatherInfo,
+            //   ),
+            // ),
+            Positioned(
+              top: -(radius / 2),
+              left: -(radius / 2),
+              child: Container(
+                height: radius,
+                width: radius,
+                alignment: Alignment.topRight,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  shape: BoxShape.circle,
                 ),
               ),
             ),
             Positioned(
+              bottom: 48,
               left: 0,
-              bottom: 0,
               child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: weatherInfo,
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  "11 : 44 PM",
+                  style: TextStyle(fontSize: 40.0),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text("22 - 24 *C, Cloudy"),
+                    Text("CBI, California"),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              right: 120,
+              top: 40,
+              child: Container(
+                height: 240,
+                width: 240,
+                alignment: Alignment.topRight,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+            Positioned(
+              right: 40,
+              top: 40,
+              child: Container(
+                height: 80,
+                width: 80,
+                alignment: Alignment.topRight,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ],
