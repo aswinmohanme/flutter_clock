@@ -189,13 +189,16 @@ class _AnalogClockState extends State<AnalogClock> {
               ),
             ),
             Positioned(
-              bottom: 40,
+              bottom: 24,
               left: 0,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   "$hour : $minute ${widget.model.is24HourFormat ? "" : _now.hour > 12 ? "PM" : "AM"}",
-                  style: TextStyle(fontSize: 40.0),
+                  style: TextStyle(
+                      fontSize: 40.0,
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -206,8 +209,14 @@ class _AnalogClockState extends State<AnalogClock> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("$_condition, $_temperatureRange"),
-                    Text(_location),
+                    Text(
+                      "$_condition, $_temperatureRange",
+                      style: TextStyle(fontFamily: 'Inter'),
+                    ),
+                    Text(
+                      _location,
+                      style: TextStyle(fontFamily: 'Inter'),
+                    ),
                   ],
                 ),
               ),
