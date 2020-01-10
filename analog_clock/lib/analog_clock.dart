@@ -194,7 +194,7 @@ class _AnalogClockState extends State<AnalogClock> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "11 : 44 PM",
+                  "${_now.hour} : ${_now.minute}",
                   style: TextStyle(fontSize: 40.0),
                 ),
               ),
@@ -206,8 +206,8 @@ class _AnalogClockState extends State<AnalogClock> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("22 - 24 *C, Cloudy"),
-                    Text("CBI, California"),
+                    Text("$_condition, $_temperatureRange"),
+                    Text(_location),
                   ],
                 ),
               ),
