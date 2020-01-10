@@ -10,9 +10,6 @@ import 'package:flutter/semantics.dart';
 import 'package:intl/intl.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
 
-import 'container_hand.dart';
-import 'drawn_hand.dart';
-
 /// Total distance traveled by a second or a minute hand, each second or minute,
 /// respectively.
 final radiansPerTick = radians(360 / 60);
@@ -40,7 +37,7 @@ class _AnalogClockState extends State<AnalogClock> {
   var _location = '';
   Timer _timer;
 
-  static double radius = 320;
+  static double radius = 380;
 
   @override
   void initState() {
@@ -115,6 +112,9 @@ class _AnalogClockState extends State<AnalogClock> {
           );
 
     final time = DateFormat.Hms().format(DateTime.now());
+    final hour =
+        DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_now);
+    final minute = DateFormat('mm').format(_now);
     final weatherInfo = DefaultTextStyle(
       style: TextStyle(color: customTheme.primaryColor),
       child: Column(
@@ -189,12 +189,12 @@ class _AnalogClockState extends State<AnalogClock> {
               ),
             ),
             Positioned(
-              bottom: 48,
+              bottom: 40,
               left: 0,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  "${_now.hour} : ${_now.minute}",
+                  "$hour : $minute ${widget.model.is24HourFormat ? "" : _now.hour > 12 ? "PM" : "AM"}",
                   style: TextStyle(fontSize: 40.0),
                 ),
               ),
@@ -216,8 +216,8 @@ class _AnalogClockState extends State<AnalogClock> {
               right: 120,
               top: 40,
               child: Container(
-                height: 240,
-                width: 240,
+                height: 260,
+                width: 260,
                 alignment: Alignment.topRight,
                 decoration: BoxDecoration(
                   color: Colors.black,
