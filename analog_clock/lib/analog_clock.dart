@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:analog_clock/screen_util.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -37,7 +38,7 @@ class _AnalogClockState extends State<AnalogClock> {
   var _location = '';
   Timer _timer;
 
-  static double radius = 380;
+  static double radius = 460;
 
   @override
   void initState() {
@@ -87,6 +88,8 @@ class _AnalogClockState extends State<AnalogClock> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, width: 800, height: 480, allowFontScaling: true);
+
     // There are many ways to apply themes to your clock. Some are:
     //  - Inherit the parent Theme (see ClockCustomizer in the
     //    flutter_clock_helper package).
@@ -176,11 +179,11 @@ class _AnalogClockState extends State<AnalogClock> {
             //   ),
             // ),
             Positioned(
-              top: -(radius / 2),
-              left: -(radius / 2),
+              top: ScreenUtil().setHeight(-(radius / 2)),
+              left: ScreenUtil().setWidth(-(radius / 2)),
               child: Container(
-                height: radius,
-                width: radius,
+                height: ScreenUtil().setHeight(radius),
+                width: ScreenUtil().setWidth(radius),
                 alignment: Alignment.topRight,
                 decoration: BoxDecoration(
                   color: Colors.black,
@@ -189,14 +192,14 @@ class _AnalogClockState extends State<AnalogClock> {
               ),
             ),
             Positioned(
-              bottom: 24,
+              bottom: ScreenUtil().setHeight(32),
               left: 0,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   "$hour : $minute ${widget.model.is24HourFormat ? "" : _now.hour > 12 ? "PM" : "AM"}",
                   style: TextStyle(
-                      fontSize: 40.0,
+                      fontSize: ScreenUtil().setSp(40),
                       fontFamily: "Inter",
                       fontWeight: FontWeight.bold),
                 ),
@@ -205,28 +208,32 @@ class _AnalogClockState extends State<AnalogClock> {
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text(
                       "$_condition, $_temperatureRange",
-                      style: TextStyle(fontFamily: 'Inter'),
+                      style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: ScreenUtil().setSp(16)),
                     ),
                     Text(
                       _location,
-                      style: TextStyle(fontFamily: 'Inter'),
+                      style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: ScreenUtil().setSp(16)),
                     ),
                   ],
                 ),
               ),
             ),
             Positioned(
-              right: 120,
-              top: 40,
+              right: ScreenUtil().setWidth(100),
+              top: ScreenUtil().setHeight(48),
               child: Container(
-                height: 260,
-                width: 260,
+                height: ScreenUtil().setHeight(300),
+                width: ScreenUtil().setWidth(300),
                 alignment: Alignment.topRight,
                 decoration: BoxDecoration(
                   color: Colors.black,
@@ -235,11 +242,11 @@ class _AnalogClockState extends State<AnalogClock> {
               ),
             ),
             Positioned(
-              right: 40,
-              top: 40,
+              right: ScreenUtil().setWidth(40),
+              top: ScreenUtil().setHeight(40),
               child: Container(
-                height: 80,
-                width: 80,
+                height: ScreenUtil().setHeight(96),
+                width: ScreenUtil().setWidth(96),
                 alignment: Alignment.topRight,
                 decoration: BoxDecoration(
                   color: Colors.black,
