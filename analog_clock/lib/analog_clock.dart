@@ -38,7 +38,7 @@ class _AnalogClockState extends State<AnalogClock> {
   var _location = '';
   Timer _timer;
 
-  static double radius = 460;
+  static double radius = 380;
 
   @override
   void initState() {
@@ -88,8 +88,10 @@ class _AnalogClockState extends State<AnalogClock> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 800, height: 480, allowFontScaling: true);
-
+    ScreenUtil.init(context,
+        width: MediaQuery.of(context).size.height * (5 / 3),
+        height: MediaQuery.of(context).size.height,
+        allowFontScaling: true);
     // There are many ways to apply themes to your clock. Some are:
     //  - Inherit the parent Theme (see ClockCustomizer in the
     //    flutter_clock_helper package).
@@ -192,14 +194,14 @@ class _AnalogClockState extends State<AnalogClock> {
               ),
             ),
             Positioned(
-              bottom: ScreenUtil().setHeight(32),
+              bottom: ScreenUtil().setHeight(24),
               left: 0,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Text(
                   "$hour : $minute ${widget.model.is24HourFormat ? "" : _now.hour > 12 ? "PM" : "AM"}",
                   style: TextStyle(
-                      fontSize: ScreenUtil().setSp(40),
+                      fontSize: ScreenUtil().setSp(32),
                       fontFamily: "Inter",
                       fontWeight: FontWeight.bold),
                 ),
@@ -216,24 +218,24 @@ class _AnalogClockState extends State<AnalogClock> {
                       "$_condition, $_temperatureRange",
                       style: TextStyle(
                           fontFamily: 'Inter',
-                          fontSize: ScreenUtil().setSp(16)),
+                          fontSize: ScreenUtil().setSp(14)),
                     ),
                     Text(
                       _location,
                       style: TextStyle(
                           fontFamily: 'Inter',
-                          fontSize: ScreenUtil().setSp(16)),
+                          fontSize: ScreenUtil().setSp(14)),
                     ),
                   ],
                 ),
               ),
             ),
             Positioned(
-              right: ScreenUtil().setWidth(100),
-              top: ScreenUtil().setHeight(48),
+              right: ScreenUtil().setWidth(60),
+              top: ScreenUtil().setHeight(40),
               child: Container(
-                height: ScreenUtil().setHeight(300),
-                width: ScreenUtil().setWidth(300),
+                height: ScreenUtil().setHeight(260),
+                width: ScreenUtil().setWidth(260),
                 alignment: Alignment.topRight,
                 decoration: BoxDecoration(
                   color: Colors.black,
@@ -242,11 +244,11 @@ class _AnalogClockState extends State<AnalogClock> {
               ),
             ),
             Positioned(
-              right: ScreenUtil().setWidth(40),
-              top: ScreenUtil().setHeight(40),
+              right: ScreenUtil().setWidth(24),
+              top: ScreenUtil().setHeight(32),
               child: Container(
-                height: ScreenUtil().setHeight(96),
-                width: ScreenUtil().setWidth(96),
+                height: ScreenUtil().setHeight(80),
+                width: ScreenUtil().setWidth(80),
                 alignment: Alignment.topRight,
                 decoration: BoxDecoration(
                   color: Colors.black,
